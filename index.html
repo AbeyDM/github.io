@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organigram CAMPEX 2026</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, rgb(71, 117, 31) 0%, rgb(0, 195, 255) 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .wrapper {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        #organigram-container {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: #000000;
+        }
+
+        .org-structure {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+        }
+
+        .level {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .level::before {
+            content: '';
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            width: 2px;
+            height: 30px;
+            background: #a9a9a9;
+            transform: translateX(-1px);
+        }
+
+        .level:first-child::before {
+            display: none;
+        }
+
+        .position-box {
+            background: linear-gradient(135deg, #000000 0%, #07330b 100%);
+            color: white;
+            padding: 25px 20px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 3px solid white;
+            transition: all 0.3s ease;
+        }
+
+        .position-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .position-box.level1 {
+            background: linear-gradient(135deg, #311d33 0%, #46050e 100%);
+            min-width: 320px;
+            padding: 30px 25px;
+            font-size: 1.1em;
+        }
+
+        .position-box.level2 {
+            background: linear-gradient(135deg, #15592b 0%, #165a5e 100%);
+            min-width: 160px;
+            font-size: 0.95em;
+        }
+
+        .position-title {
+            font-weight: 700;
+            font-size: 1em;
+            margin-bottom: 8px;
+        }
+
+        .person-name {
+            font-weight: 600;
+            font-size: 0.95em;
+            margin-bottom: 4px;
+        }
+
+        .person-class {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        .divisi-section {
+            border-top: 3px solid #056b1b;
+            padding-top: 40px;
+            margin-top: 40px;
+        }
+
+        .divisi-section h2 {
+            text-align: center;
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .divisi-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 30px;
+        }
+
+        .divisi-box {
+            background: #f8f9fa;
+            border-left: 5px solidrgb(0, 234, 86)a;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .divisi-box:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            transform: translateY(-3px);
+        }
+
+        .divisi-title {
+            background: linear-gradient(135deg, rgb(0, 21, 6) 0%, #059c90 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1.15em;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .ko-label {
+            background: #e7f3ff;
+            color: #000000;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        .ko-box {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: #333;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .ko-box .person-name {
+            color: #333;
+            font-weight: 700;
+        }
+
+        .ko-box .person-class {
+            color: #555;
+            opacity: 1;
+        }
+
+        .anggota-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .anggota-item {
+            background: white;
+            padding: 12px 15px;
+            border-left: 4px solid #43e97b;
+            border-radius: 6px;
+            font-size: 0.9em;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+        }
+
+        .anggota-item:hover {
+            background: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .anggota-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .anggota-class {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .info-footer {
+            background: #f0f7ff;
+            border-left: 4px solid #000000;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 50px;
+            text-align: center;
+            font-size: 0.95em;
+            color: #333;
+        }
+
+        .info-footer strong {
+            color: #000000;
+        }
+
+        @media (max-width: 1200px) {
+            .divisi-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .divisi-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .position-box.level1 {
+                min-width: 250px;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            #organigram-container {
+                padding: 30px 20px;
+            }
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .button-group {
+                display: none;
+            }
+
+            #organigram-container {
+                box-shadow: none;
+                border-radius: 0;
+                padding: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="organigram-container">
+            <div class="header">
+                <h1>ORGANIGRAM CAMPEX 2026</h1>
+                <p>Panitia Pelaksana Campus Expo 2026 MA Masyhudiyah</p>
+            </div>
+
+            <div class="org-structure">
+                <!-- KETUA PELAKSANA -->
+                <div class="level">
+                    <div class="position-box level1">
+                        <div class="position-title">KETUA PELAKSANA 1</div>
+                        <div class="person-name">Bey Arifin Zakaria</div>
+                        <div class="person-class">PPNS • 2024</div>
+                    </div>
+                    <div class="position-box level1">
+                        <div class="position-title">KETUA PELAKSANA 2</div>
+                        <div class="person-name">Mohammad Hafid Ilmi</div>
+                        <div class="person-class">Kelas 11-3</div>
+                    </div>
+                    <div class="position-box level1">
+                        <div class="position-title">KETUA PELAKSANA 3</div>
+                        <div class="person-name">Shofi Rizqi Inayah</div>
+                        <div class="person-class">Kelas 11-1</div>
+                    </div>
+                </div>
+
+                <!-- WAKIL & SUPPORT STAFF -->
+                <div class="level">
+                    <div class="position-box level2">
+                        <div class="position-title">Wakil Ketua Pelaksana</div>
+                        <div class="person-name">Nasik</div>
+                        <div class="person-class">UINSA • 2024</div>
+                    </div>
+                    <div class="position-box level2">
+                        <div class="position-title">Sekretaris Umum 1</div>
+                        <div class="person-name">Ita</div>
+                        <div class="person-class">UNESA • 2024</div>
+                    </div>
+                    <div class="position-box level2">
+                        <div class="position-title">Sekretaris Umum 2</div>
+                        <div class="person-name">Naurah Salsabila</div>
+                        <div class="person-class">Kelas 11-1</div>
+                    </div>
+                    <div class="position-box level2">
+                        <div class="position-title">Sekretaris Umum 3</div>
+                        <div class="person-name">Mas Ayu Syarifah</div>
+                        <div class="person-class">Kelas 10-1</div>
+                    </div>
+                    <div class="position-box level2">
+                        <div class="position-title">Bendahara Umum 1</div>
+                        <div class="person-name">Sevieka</div>
+                        <div class="person-class">UNESA • 2024</div>
+                    </div>
+                    <div class="position-box level2">
+                        <div class="position-title">Bendahara Umum 2</div>
+                        <div class="person-name">Arina Sa'adini Ahmadah</div>
+                        <div class="person-class">Kelas 10-2</div>
+                    </div>
+                    <div class="position-box level2">
+                        <div class="position-title">Bendahara Umum 3</div>
+                        <div class="person-name">Novy Rizky Ardelia</div>
+                        <div class="person-class">Kelas 10-3</div>
+                    </div>
+                </div>
+
+                <!-- DIVISI OPERASIONAL -->
+                <div class="divisi-section">
+                    <h2>DIVISI OPERASIONAL</h2>
+
+                    <div class="divisi-container">
+                        <!-- DIVISI ACARA -->
+                        <div class="divisi-box">
+                            <div class="divisi-title">SIE ACARA</div>
+                            <div class="ko-label">Koordinator 1 Sie Acara</div>
+                            <div class="ko-box">
+                                <div class="person-name">Rafi</div>
+                                <div class="person-class">UNESA • 2025</div>
+                            </div>
+                            <div style="background: #e7f3ff; color: #000000; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; display: inline-block;">Koordinator 2 Sie Acara</div>
+                            <div class="ko-box" style="background: linear-gradient(135deg, #ffb347 0%, #ff8c42 100%); margin-bottom: 20px;">
+                                <div class="person-name">Deslina Ayu Ningtyas</div>
+                                <div class="person-class">Kelas 10-1</div>
+                            </div>
+                            <div class="ko-label">Anggota Sie Acara</div>
+                            <div class="anggota-list">
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Adinda Cinta Dwi Yurlita</div>
+                                    <div class="anggota-class">11-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Noor Shania Raziqa</div>
+                                    <div class="anggota-class">11-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Muhammad Najib Sa'adi</div>
+                                    <div class="anggota-class">10-2</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Muhammad Sofyan Sauri</div>
+                                    <div class="anggota-class">10-2</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DIVISI HUMAS -->
+                        <div class="divisi-box">
+                            <div class="divisi-title">SIE HUMAS</div>
+                            <div class="ko-label">Koordinator 1 Sie Humas</div>
+                            <div class="ko-box">
+                                <div class="person-name">Kevin</div>
+                                <div class="person-class">UNAIR • 2024</div>
+                            </div>
+                            <div class="ko-label">Koordinator 2 Sie Humas</div>
+                            <div class="ko-box">
+                                <div class="person-name">Nikma</div>
+                                <div class="person-class">PPNS • 2025</div>
+                            </div>
+
+                            <div style="background: #e7f3ff; color: #000000; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; display: inline-block;">Koordinator 3 Sie Humas</div>
+                            <div class="ko-box" style="background: linear-gradient(135deg, #ffb347 0%, #ff8c42 100%); margin-bottom: 20px;">
+                                <div class="person-name">Faizatul Mubayyinah</div>
+                                <div class="person-class">Kelas 11-3</div>
+                            </div>
+                            <div class="anggota-list">
+                            <div class="ko-label">Anggota Sie Humas</div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Desy Ayu Sekarsari</div>
+                                    <div class="anggota-class">11-2</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Ghaizka Putri Aminarti</div>
+                                    <div class="anggota-class">11-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Arina Haqiqiyah Millaty</div>
+                                    <div class="anggota-class">10-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Alyashafa Rizqi Inayah</div>
+                                    <div class="anggota-class">10-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Delisya Qotrun Nada</div>
+                                    <div class="anggota-class">10-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Dina Ghurratul Maimunah</div>
+                                    <div class="anggota-class">10-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Rembulan Nur Madinah</div>
+                                    <div class="anggota-class">10-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Zahiratus Tsaminah Nuriza</div>
+                                    <div class="anggota-class">10-2</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Dinda Anggun Lestari</div>
+                                    <div class="anggota-class">10-1</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DIVISI KORLAP -->
+                        <div class="divisi-box">
+                            <div class="divisi-title">SIE KORLAP</div>
+                            <div class="ko-label">Koordinator 1 Sie Korlap</div>
+                            <div class="ko-box">
+                                <div class="person-name">Farid</div>
+                                <div class="person-class">UNESA • 2024</div>
+                            </div>
+                            <div class="ko-label">Koordinator 2 Sie Korlap</div>
+                            <div class="ko-box">
+                                <div class="person-name">Obi</div>
+                                <div class="person-class">UPN • 2024</div>
+                            </div>
+                            <div style="background: #e7f3ff; color: #000000; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; display: inline-block;">Koordinator 3 Sie Korlap</div>
+                            <div class="ko-box" style="background: linear-gradient(135deg, #66ff47 0%, #ff8c42 100%); margin-bottom: 20px;">
+                                <div class="person-name">Ahmad Gizlan</div>
+                                <div class="person-class">Kelas 11-3</div>
+                            </div>
+                            <div class="anggota-list">
+                            <div class="ko-label">Anggota Sie Korlap</div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Ahmad Hayiz Fadhlan Abu Qorir Al-Anamy</div>
+                                    <div class="anggota-class">11-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Hafizat Fakhriyanto</div>
+                                    <div class="anggota-class">11-2</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Ahmad Agus Salim</div>
+                                    <div class="anggota-class">11-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Moh Aqbil Fadhlih An-Nafi</div>
+                                    <div class="anggota-class">11-2</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Rizky Afriza</div>
+                                    <div class="anggota-class">11-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Qolbi Atsir Athaullah</div>
+                                    <div class="anggota-class">10-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Bunga Adelia Putri Dhevia</div>
+                                    <div class="anggota-class">11-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Jamilah Nur Sakhi</div>
+                                    <div class="anggota-class">10-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Juanda Caesar Putra</div>
+                                    <div class="anggota-class">10-3</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DIVISI PDD -->
+                        <div class="divisi-box">
+                            <div class="divisi-title">SIE PDD</div>
+                            <div class="ko-label">Koordinator 1 Sie PDD</div>
+                            <div class="ko-box">
+                                <div class="person-name">Refi</div>
+                                <div class="person-class">UTM • 2024</div>
+                            </div>
+                            <div class="ko-label">Koordinator 2 Sie PDD</div>
+                            <div class="ko-box">
+                                <div class="person-name">Nimas</div>
+                                <div class="person-class">ITS • 2024</div>
+                            </div>
+                            <div style="background: #e7f3ff; color: #000000; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; display: inline-block;">Koordinator 3 Sie PDD</div>
+                            <div class="ko-box" style="background: linear-gradient(135deg, #56ff47 0%, #ff8c42 100%); margin-bottom: 20px;">
+                                <div class="person-name">Maulani Farah Afriza</div>
+                                <div class="person-class">Kelas 11-2</div>
+                            </div>
+                            <div class="anggota-list">
+                            <div class="ko-label">Anggota Sie PDD</div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Devita Virnina Putri</div>
+                                    <div class="anggota-class">11-2</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Adinda Laila Fitria</div>
+                                    <div class="anggota-class">11-2</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Adinda Salsabila Indra</div>
+                                    <div class="anggota-class">10-3</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Rahil Shafarina Marella</div>
+                                    <div class="anggota-class">10-1</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- DIVISI KONSUMSI -->
+                        <div class="divisi-box">
+                            <div class="divisi-title">SIE KONSUMSI</div>
+                            <div class="ko-label">Koordinator 1 Sie Konsumsi</div>
+                            <div class="ko-box">
+                                <div class="person-name">Putri Wahyuni</div>
+                                <div class="person-class">UNESA • 2024</div>
+                            </div>
+                            <div style="background: #e7f3ff; color: #000000; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; display: inline-block;">Koordinator 2 Sie Konsumsi</div>
+                            <div class="ko-box" style="background: linear-gradient(135deg, #4dff47 0%, #ff8c42 100%); margin-bottom: 20px;">
+                                <div class="person-name">Saffa Rahmalia</div>
+                                <div class="person-class">Kelas 11-1</div>
+                            </div>
+                            <div class="anggota-list">
+                            <div class="ko-label">Anggota Sie Konsumsi</div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Nadifatus Syalima</div>
+                                    <div class="anggota-class">11-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Danish Laist</div>
+                                    <div class="anggota-class">10-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Prasetyo Brian Saputra</div>
+                                    <div class="anggota-class">10-1</div>
+                                </div>
+                                <div class="anggota-item">
+                                    <div class="anggota-name">Regina Ratna Cahyani</div>
+                                    <div class="anggota-class">10-2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-footer">
+                <strong>KEPANITIAAN CAMPEX 2026:</strong><br>
+                Total 50 Anggota | 3 Ketua Pelaksana + 1 Wakil + 7 Support Staff + 6 Divisi Operasional + 9 Koordinator 
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
