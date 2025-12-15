@@ -14,9 +14,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, rgb(71, 117, 31) 0%, rgb(0, 195, 255) 100%);
+            background: linear-gradient(135deg, #f6fbff 0%, #eef7f2 100%);
             padding: 20px;
             min-height: 100vh;
+            color: #21303a;
         }
 
         .wrapper {
@@ -53,14 +54,15 @@
         .header {
             text-align: center;
             margin-bottom: 50px;
-            border-bottom: 3px solid #000000;
+            border-bottom: 1px solid rgba(20,30,50,0.06);
             padding-bottom: 20px;
         }
 
         .header h1 {
-            font-size: 2.5em;
-            color: #000000;
+            font-size: 2.2em;
+            color: #102028;
             margin-bottom: 10px;
+            letter-spacing: 0.6px;
         }
 
         .header p {
@@ -98,33 +100,35 @@
         }
 
         .position-box {
-            background: linear-gradient(135deg, #000000 0%, #07330b 100%);
-            color: white;
-            padding: 25px 20px;
-            border-radius: 10px;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            color: #0f1720;
+            padding: 24px 18px;
+            border-radius: 12px;
             text-align: center;
             min-width: 200px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border: 3px solid white;
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(20,30,50,0.04);
+            border: 1px solid rgba(20,30,50,0.04);
+            transition: all 0.25s ease;
         }
 
         .position-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(20,30,50,0.08);
         }
 
         .position-box.level1 {
-            background: linear-gradient(135deg, #311d33 0%, #46050e 100%);
+            background: linear-gradient(135deg, #fff8f0 0%, #fffdf7 100%);
             min-width: 320px;
             padding: 30px 25px;
-            font-size: 1.1em;
+            font-size: 1.05em;
+            border-left: 4px solid rgba(255,150,80,0.08);
         }
 
         .position-box.level2 {
-            background: linear-gradient(135deg, #15592b 0%, #165a5e 100%);
+            background: linear-gradient(135deg, #f6fff7 0%, #fbfffb 100%);
             min-width: 160px;
             font-size: 0.95em;
+            border-left: 4px solid rgba(0,140,120,0.06);
         }
 
         .position-title {
@@ -164,16 +168,16 @@
         }
 
         .divisi-box {
-            background: #f8f9fa;
-            border-left: 5px solidrgb(0, 234, 86)a;
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            background: linear-gradient(180deg, #fbfcfd 0%, #f6fbff 100%);
+            border-left: 5px solid rgba(0,180,120,0.12);
+            border-radius: 12px;
+            padding: 28px;
+            box-shadow: 0 8px 22px rgba(20,30,50,0.04);
+            transition: all 0.25s ease;
         }
 
         .divisi-box:hover {
-            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            box-shadow: 0 14px 40px rgba(20,30,50,0.06);
             transform: translateY(-3px);
         }
 
@@ -218,6 +222,74 @@
             opacity: 1;
         }
 
+        /* Jobdesk popup ketika nama diklik */
+        .person-name,
+        .anggota-name {
+            cursor: pointer;
+        }
+
+        .jobdesc {
+            display: block;
+            background: rgba(12,18,24,0.95);
+            color: #ffffff;
+            backdrop-filter: blur(6px) saturate(1.02);
+            border-left: 3px solid rgba(255,210,77,0.92);
+            padding: 10px 12px;
+            margin-top: 8px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+            font-size: 0.9em;
+            line-height: 1.35;
+            max-width: 340px;
+            z-index: 80;
+            transition: transform 140ms ease, opacity 140ms ease;
+            transform-origin: bottom left;
+            animation: riseUp 160ms ease both;
+        }
+
+        @keyframes riseUp {
+            from { opacity: 0; transform: translateY(8px) scale(.995); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        /* Timeline & Jobdesk section */
+        #jobdesk-timeline {
+            margin-top: 40px;
+            background: #ffffff;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+        }
+
+        #jobdesk-timeline h2 {
+            font-size: 1.25em;
+            margin-bottom: 12px;
+        }
+
+        .timeline-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 18px;
+        }
+
+        .timeline-table th,
+        .timeline-table td {
+            border: 1px solid #eee;
+            padding: 8px 10px;
+            text-align: left;
+        }
+
+        .job-item {
+            margin-bottom: 18px;
+        }
+
+        .job-item h3 {
+            margin: 8px 0;
+            font-size: 1.05em;
+        }
+
+        .job-item ul {
+            margin-left: 18px;
+        }
         .anggota-list {
             display: flex;
             flex-direction: column;
@@ -312,6 +384,33 @@
                 padding: 40px;
             }
         }
+
+        /* modal styles */
+        #job-modal {
+          position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+          background: rgba(0,0,0,0.6); z-index: 9999; padding: 20px;
+        }
+        #job-modal .job-body {
+          background: #fff; color:#111; max-width:700px; width:100%; max-height:86vh; overflow:auto;
+          border-radius:10px; padding:20px; box-shadow:0 20px 60px rgba(0,0,0,0.4);
+          font-size: 14px;            /* lebih kecil */
+          text-align: center;         /* pusatkan teks paragraf/heading */
+          line-height: 1.45;
+          font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        }
+        #job-modal .job-body h3 { margin-top:0; font-size:1.15em; text-align:center; }
+        #job-modal .job-body .job-content p { text-align:center; margin:8px 0; }
+        #job-modal .job-body .job-content ul {
+          text-align: left;           /* isi list tetap rata kiri untuk keterbacaan */
+          display: inline-block;      /* letakkan daftar sebagai blok yang terpusat */
+          margin: 12px auto;
+          padding-left: 20px;
+        }
+        #job-modal .job-body .job-content ul li {
+          font-size: 13.5px;
+          margin-bottom: 6px;
+        }
+        #job-modal .close-modal { float:right; cursor:pointer; font-weight:700; padding:4px 8px; border-radius:6px; background:#eee; }
     </style>
 </head>
 <body>
@@ -384,8 +483,8 @@
                 <!-- DIVISI OPERASIONAL -->
                 <div class="divisi-section">
                     <h2>DIVISI OPERASIONAL</h2>
-
                     <div class="divisi-container">
+
                         <!-- DIVISI ACARA -->
                         <div class="divisi-box">
                             <div class="divisi-title">SIE ACARA</div>
@@ -394,11 +493,12 @@
                                 <div class="person-name">Rafi</div>
                                 <div class="person-class">UNESA • 2025</div>
                             </div>
-                            <div style="background: #e7f3ff; color: #000000; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; display: inline-block;">Koordinator 2 Sie Acara</div>
-                            <div class="ko-box" style="background: linear-gradient(135deg, #ffb347 0%, #ff8c42 100%); margin-bottom: 20px;">
+                            <div class="ko-label">Koordinator 2 Sie Acara</div>
+                            <div class="ko-box">
                                 <div class="person-name">Deslina Ayu Ningtyas</div>
                                 <div class="person-class">Kelas 10-1</div>
                             </div>
+
                             <div class="ko-label">Anggota Sie Acara</div>
                             <div class="anggota-list">
                                 <div class="anggota-item">
@@ -428,19 +528,14 @@
                                 <div class="person-name">Kevin</div>
                                 <div class="person-class">UNAIR • 2024</div>
                             </div>
-                            <div class="ko-label">Koordinator 2 Sie Humas</div>
+                            <div class="ko-label">Koordinator 3 Sie Humas</div>
                             <div class="ko-box">
-                                <div class="person-name">Nikma</div>
-                                <div class="person-class">PPNS • 2025</div>
-                            </div>
-
-                            <div style="background: #e7f3ff; color: #000000; padding: 8px 16px; border-radius: 20px; font-size: 0.85em; font-weight: 600; margin-bottom: 12px; display: inline-block;">Koordinator 3 Sie Humas</div>
-                            <div class="ko-box" style="background: linear-gradient(135deg, #ffb347 0%, #ff8c42 100%); margin-bottom: 20px;">
                                 <div class="person-name">Faizatul Mubayyinah</div>
                                 <div class="person-class">Kelas 11-3</div>
                             </div>
-                            <div class="anggota-list">
+
                             <div class="ko-label">Anggota Sie Humas</div>
+                            <div class="anggota-list">
                                 <div class="anggota-item">
                                     <div class="anggota-name">Desy Ayu Sekarsari</div>
                                     <div class="anggota-class">11-2</div>
@@ -480,8 +575,11 @@
                             </div>
                         </div>
 
-                        <!-- DIVISI KORLAP -->
-                        <div class="divisi-box">
+                    </div>
+                </div>
+
+                <!-- DIVISI KORLAP -->
+                <div class="divisi-box">
                             <div class="divisi-title">SIE KORLAP</div>
                             <div class="ko-label">Koordinator 1 Sie Korlap</div>
                             <div class="ko-box">
@@ -621,7 +719,540 @@
             </div>
         </div>
     </div>
-
     
+    <!-- Hidden jobdesk templates (used for click popups) -->
+    <div id="job-templates" style="display:none;">
+        <div class="job-item">
+            <h3>🗺️ KOORDINATOR 2 DIVISI KORLAP (OSIS)</h3>
+            <p><strong>Nama:</strong> Ahmad Gizlan — <strong>Asal:</strong> Kelas 11-3</p>
+            <ul>
+                <li>Mengatur tata letak ruangan dan area booth</li>
+                <li>Memastikan signage dan pengarahan jelas</li>
+                <li>Mengelola sistem parkir dan akses peserta</li>
+                <li>Mengkoordinasikan setup dan breakdown area</li>
+                <li>Menangani infrastruktur di lapangan</li>
+                <li>Memastikan kebersihan dan keamanan lokasi</li>
+                <li>Membuat kontrol lapangan saat acara berlangsung</li>
+                <li>Melaporkan kepada Koordinator 1 Farid</li>
+            </ul>
+
+        </div>
+
+        <div class="job-item">
+            <h3>🗺️ ANGGOTA DIVISI KORLAP (OSIS)</h3>
+            <p><strong>Nama:</strong> Ahmad Hayiz Fadhlan Abu Qorir Al-Anamy, Hafizat Fakhriyanto, Ahmad Agus Salim, Moh Aqbil Fadhlih An-Nafi, Rizky Afriza, Qolbi Atsir Athaullah, Bunga Adelia Putri Dhevia, Jamilah Nur Sakhi, Juanda Caesar Putra</p>
+            <p><strong>Asal:</strong> Kelas 11-3, 11-2, 11-3, 11-2, 11-1, 10-1, 11-3, 10-3, 10-3</p>
+            <ul>
+                <li>Mempersiapkan lokasi expo sebelum acara</li>
+                <li>Menyiapkan dan mengatur fasilitas lapangan</li>
+                <li>Menjaga keamanan dan ketertiban lokasi</li>
+                <li>Memandu peserta dan pengunjung</li>
+                <li>Menangani keadaan darurat</li>
+                <li>Melakukan cleanup area setelah acara</li>
+                <li>Menjaga protokol kesehatan dan keselamatan</li>
+            </ul>
+
+        </div>
+
+        <div class="job-item">
+            <h3>🎯 KETUA PELAKSANA 1 - Koordinasi Internal &amp; Eksternal</h3>
+            <p><strong>Nama:</strong> Bey Arifin Zakaria — <strong>Asal:</strong> PPNS - Angkatan 2024</p>
+            <p><strong>Fokus:</strong> Mengurusi segala aspek internal-eksternal, terutama koordinator dari mahasiswa dan OSIS</p>
+            <ul>
+                <li>Memimpin seluruh panitia Campus Expo 2026</li>
+                <li>Mengkoordinasikan semua divisi (Acara, Humas, Korlap, PDD, Konsumsi)</li>
+                <li>Menjalin hubungan dengan universitas mitra expo</li>
+                <li>Berkoordinasi dengan koordinator eksternal (mahasiswa)</li>
+                <li>Mengelola hubungan dengan sponsor dan media</li>
+                <li>Mengurus perizinan dan izin resmi</li>
+                <li>Membuat keputusan strategis untuk acara</li>
+                <li>Melaporkan perkembangan kepada pembina</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🎯 KETUA PELAKSANA 2 - Internal OSIS &amp; Keluarga Panitia</h3>
+            <p><strong>Nama:</strong> Mohammad Hafid Ilmi — <strong>Asal:</strong> Kelas 11-3 (Ketua OSIS)</p>
+            <p><strong>Fokus:</strong> Fokus ke internal anggota OSIS dan membangun hubungan keluarga panitia yang solid</p>
+            <ul>
+                <li>Membangun kohesi dan kekeluargaan dalam tim panitia</li>
+                <li>Menjaga hubungan baik antar anggota OSIS</li>
+                <li>Menyelesaikan konflik internal dengan pendekatan personal</li>
+                <li>Memberikan motivasi kepada semua anggota</li>
+                <li>Mengelola komunikasi internal panitia</li>
+                <li>Mengawasi semua divisi OSIS</li>
+                <li>Mengatur rapat koordinasi rutin</li>
+                <li>Menggantikan Ketua Pelaksana 1 jika diperlukan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🎯 KETUA PELAKSANA 3 - Eksternal OSIS &amp; Hubungan Alumni</h3>
+            <p><strong>Nama:</strong> Shofi Rizqi Inayah — <strong>Asal:</strong> Kelas 11-1</p>
+            <p><strong>Fokus:</strong> Fokus ke eksternal anggota OSIS dengan para alumni (mahasiswa)</p>
+            <ul>
+                <li>Menjalin komunikasi dengan mahasiswa alumni OSIS</li>
+                <li>Membangun partnership dengan mahasiswa sebagai pembicara/narasumber</li>
+                <li>Menjaga hubungan dengan alumni OSIS yang berkontribusi</li>
+                <li>Mengundang alumni untuk berbagi pengalaman</li>
+                <li>Menciptakan networking opportunities</li>
+                <li>Menjadi jembatan antara OSIS dan mahasiswa alumni</li>
+                <li>Memastikan integrasi harmonis antara OSIS dan alumni</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>👥 WAKIL KETUA PELAKSANA</h3>
+            <p><strong>Nama:</strong> Nasik — <strong>Asal:</strong> UINSA - Angkatan 2024 (Koordinator Eksternal)</p>
+            <ul>
+                <li>Membantu seluruh ketiga Ketua Pelaksana</li>
+                <li>Menggantikan salah satu Ketua Pelaksana jika diperlukan</li>
+                <li>Mengawasi kinerja semua divisi</li>
+                <li>Menangani masalah dan hambatan yang muncul</li>
+                <li>Menjadi mediator dalam penyelesaian konflik</li>
+                <li>Memantau budget dan penggunaan dana</li>
+                <li>Siap melaksanakan tugas khusus apapun</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📝 SEKRETARIS UMUM 1 (EKSTERNAL)</h3>
+            <p><strong>Nama:</strong> Ita — <strong>Asal:</strong> UNESA - Angkatan 2024</p>
+            <ul>
+                <li>Mengelola surat-menyurat dan dokumen resmi panitia</li>
+                <li>Membuat catatan dan dokumentasi rapat</li>
+                <li>Mengatur jadwal rapat dan pertemuan</li>
+                <li>Mengelola database peserta dan booth expo</li>
+                <li>Mengurus perizinan dan surat-surat administrasi</li>
+                <li>Mengarsipkan dokumen penting</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📝 SEKRETARIS UMUM 2 (OSIS)</h3>
+            <p><strong>Nama:</strong> Naurah Salsabila — <strong>Asal:</strong> Kelas 11-1</p>
+            <ul>
+                <li>Membantu Sekretaris Umum 1 dalam administrasi</li>
+                <li>Menyiapkan dokumen dan proposal kegiatan</li>
+                <li>Mengatur sistem filing dan dokumentasi</li>
+                <li>Mencatat kehadiran peserta dan panitia</li>
+                <li>Menyusun laporan perkembangan kegiatan</li>
+                <li>Mengelola komunikasi antar divisi OSIS</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📝 SEKRETARIS UMUM 3 (OSIS)</h3>
+            <p><strong>Nama:</strong> Mas Ayu Syarifah Fathimah — <strong>Asal:</strong> Kelas 10-1</p>
+            <ul>
+                <li>Membantu administrasi divisi operasional</li>
+                <li>Mencatat kebutuhan dari setiap divisi</li>
+                <li>Mengarsipkan dokumen divisi dengan rapi</li>
+                <li>Menyiapkan template dan format dokumen standar</li>
+                <li>Mendukung komunikasi antar divisi OSIS</li>
+                <li>Membantu penyusunan laporan akhir kegiatan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>💰 BENDAHARA UMUM 1 (EKSTERNAL)</h3>
+            <p><strong>Nama:</strong> Sevieka — <strong>Asal:</strong> UNESA - Angkatan 2024</p>
+            <ul>
+                <li>Mengelola keuangan panitia Campus Expo secara keseluruhan</li>
+                <li>Menerima dan mencatat semua pemasukan dana</li>
+                <li>Menyetujui dan mencatat semua pengeluaran</li>
+                <li>Membuat laporan keuangan berkala</li>
+                <li>Mengontrol penggunaan budget sesuai rencana</li>
+                <li>Bertanggung jawab atas pertanggungjawaban keuangan</li>
+                <li>Koordinasi dengan bendahara divisi</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>💰 BENDAHARA UMUM 2 (OSIS)</h3>
+            <p><strong>Nama:</strong> Arina Sa'adini Ahmadah — <strong>Asal:</strong> Kelas 10-2</p>
+            <ul>
+                <li>Membantu pengelolaan keuangan panitia</li>
+                <li>Membuat laporan kas harian dan mingguan</li>
+                <li>Menginventaris bukti pengeluaran dan bukti terima</li>
+                <li>Membantu rekonsiliasi keuangan bulanan</li>
+                <li>Menyiapkan rekapitulasi pengeluaran per divisi</li>
+                <li>Mendokumentasikan semua transaksi keuangan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>💰 BENDAHARA UMUM 3 (OSIS)</h3>
+            <p><strong>Nama:</strong> Novy Rizky Ardelia — <strong>Asal:</strong> Kelas 10-3</p>
+            <ul>
+                <li>Menangani kas harian dan transaksi kecil</li>
+                <li>Mencatat pengeluaran operasional rutin</li>
+                <li>Menyediakan laporan pengeluaran harian</li>
+                <li>Membantu audit internal keuangan</li>
+                <li>Mendokumentasikan bukti pengeluaran</li>
+                <li>Membantu perencanaan budget kegiatan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🎉 KOORDINATOR 1 DIVISI ACARA (EKSTERNAL - MAHASISWA)</h3>
+            <p><strong>Nama:</strong> Rafi — <strong>Asal:</strong> UNESA - Angkatan 2025</p>
+            <ul>
+                <li>Merancang konsep, tema, dan timeline Campus Expo</li>
+                <li>Menentukan lokasi, waktu, dan format acara</li>
+                <li>Mengelola pembicara dan narasumber dari alumni mahasiswa</li>
+                <li>Mengkoordinasikan dengan Koordinator 2 Sie Acara (OSIS)</li>
+                <li>Memastikan semua aktivitas berjalan lancar</li>
+                <li>Melaporkan perkembangan kepada Ketua Pelaksana 1</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🎉 KOORDINATOR 2 DIVISI ACARA (OSIS)</h3>
+            <p><strong>Nama:</strong> Deslina Ayu Ningtyas — <strong>Asal:</strong> Kelas 10-1</p>
+            <ul>
+                <li>Membantu merancang detail teknis acara</li>
+                <li>Menyusun rundown harian dan jam-jam kegiatan</li>
+                <li>Mengelola ruang dan area untuk setiap aktivitas</li>
+                <li>Mengkoordinasikan supply dan alat yang dibutuhkan</li>
+                <li>Mengawasi pelaksanaan acara secara real-time</li>
+                <li>Melaporkan kepada Koordinator 1</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🎉 ANGGOTA DIVISI ACARA (OSIS)</h3>
+            <p><strong>Nama:</strong> Adinda Cinta Dwi Yurlita, Noor Shania Raziqa, Muhammad Najib Sa'adi, Muhammad Sofyan Sauri</p>
+            <p><strong>Asal:</strong> Kelas 11-1, 11-1, 10-2, 10-2</p>
+            <ul>
+                <li>Melaksanakan kegiatan sesuai rundown acara</li>
+                <li>Mempersiapkan area dan fasilitas acara</li>
+                <li>Mendampingi peserta selama kegiatan</li>
+                <li>Memastikan keselamatan dan disiplin peserta</li>
+                <li>Mencatat hambatan atau perubahan saat acara</li>
+                <li>Memberikan feedback untuk perbaikan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📢 KOORDINATOR 1 DIVISI HUMAS (EKSTERNAL - MAHASISWA)</h3>
+            <p><strong>Nama:</strong> Kevin — <strong>Asal:</strong> UNAIR - Angkatan 2024</p>
+            <ul>
+                <li>Merencanakan strategi komunikasi dan publikasi Campus Expo</li>
+                <li>Mengelola hubungan dengan media massa</li>
+                <li>Membuat konsep kreatif untuk promosi acara</li>
+                <li>Mengurus izin dan press release ke media</li>
+                <li>Merencanakan publikasi di media sosial dan tradisional</li>
+                <li>Menjalin kerjasama dengan sponsor</li>
+                <li>Koordinasi dengan Koordinator 3 Sie Humas (OSIS)</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📢 KOORDINATOR 3 DIVISI HUMAS (OSIS)</h3>
+            <p><strong>Nama:</strong> Faizatul Mubayyinah — <strong>Asal:</strong> Kelas 11-3</p>
+            <ul>
+                <li>Mengelola media sosial Campus Expo (Instagram, TikTok, dll)</li>
+                <li>Membuat konten visual dan caption promosi</li>
+                <li>Mengunggah postingan dan jadwal kampanye</li>
+                <li>Mengontrol feedback dan engagement di media sosial</li>
+                <li>Membuat grafis, poster, dan desain promosi</li>
+                <li>Merekap analytics dan laporan publikasi digital</li>
+                <li>Melaporkan kepada Koordinator 1 Kevin</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📢 ANGGOTA DIVISI HUMAS (OSIS)</h3>
+            <p><strong>Nama:</strong> Desy Ayu Sekarsari, Ghaizka Putri Aminarti, Arina Haqiqiyah Millaty, Alyashafa Rizqi Inayah, Delisya Qotrun Nada, Dina Ghurratul Maimunah, Rembulan Nur Madinah, Zahiratus Tsaminah Nuriza, Dinda Anggun Lestari</p>
+            <p><strong>Asal:</strong> Kelas 11-2, 11-1, 10-3, 10-3, 10-1, 10-3, 10-1, 10-2, 10-1</p>
+            <ul>
+                <li>Membantu peliputan dan dokumentasi acara</li>
+                <li>Mewawancarai pembicara, sponsor, dan peserta</li>
+                <li>Membuat tulisan dan artikel tentang acara</li>
+                <li>Mendistribusikan siaran pers ke media</li>
+                <li>Membuat materi promosi (flyer, banner, poster)</li>
+                <li>Menghubungi pihak eksternal untuk kerja sama</li>
+                <li>Mengelola database media dan kontak pers</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🗺️ KOORDINATOR 1 DIVISI KORLAP (EKSTERNAL - MAHASISWA)</h3>
+            <p><strong>Nama:</strong> Farid — <strong>Asal:</strong> UNESA - Angkatan 2024</p>
+            <ul>
+                <li>Memimpin dan mengkoordinasi seluruh kegiatan lapangan</li>
+                <li>Menjadi penghubung antara panitia dan pihak eksternal</li>
+                <li>Menangani perizinan penggunaan lokasi dan fasilitas</li>
+                <li>Mengatur jadwal dan teknis pelaksanaan di lapangan</li>
+                <li>Memastikan semua kebutuhan logistik terpenuhi</li>
+                <li>Melakukan evaluasi dan laporan pelaksanaan kegiatan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🗺️ KOORDINATOR 2 DIVISI KORLAP (EKSTERNAL - MAHASISWA)</h3>
+            <p><strong>Nama:</strong> Obi — <strong>Asal:</strong> UPN - Angkatan 2024</p>
+            <ul>
+                <li>Membantu Koordinator 1 dalam mengatur kegiatan lapangan</li>
+                <li>Menyiapkan dan mengecek perlengkapan acara di lokasi</li>
+                <li>Mengatur area registrasi dan welcome desk</li>
+                <li>Memastikan semua panitia memahami tugas dan posisi masing-masing</li>
+                <li>Menjadi kontak person untuk masalah teknis di lapangan</li>
+                <li>Melaporkan langsung kepada Koordinator 1 Farid</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🗺️ KOORDINATOR 3 DIVISI KORLAP (EKSTERNAL - MAHASISWA)</h3>
+            <p><strong>Nama:</strong> Ahmad Gizlan — <strong>Asal:</strong> Kelas 11-3</p>
+            <ul>
+                <li>Mengatur tata letak ruangan dan area booth</li>
+                <li>Memastikan signage dan pengarahan jelas</li>
+                <li>Mengelola sistem parkir dan akses peserta</li>
+                <li>Mengkoordinasikan setup dan breakdown area</li>
+                <li>Menangani infrastruktur di lapangan</li>
+                <li>Memastikan kebersihan dan keamanan lokasi</li>
+                <li>Membuat kontrol lapangan saat acara berlangsung</li>
+                <li>Melaporkan kepada Koordinator 1 Farid</li>
+            </ul>
+
+        </div>
+
+        <div class="job-item">
+            <h3>🗺️ ANGGOTA DIVISI KORLAP (OSIS)</h3>
+            <p><strong>Nama:</strong> Ahmad Hayiz Fadhlan Abu Qorir Al-Anamy, Hafizat Fakhriyanto, Ahmad Agus Salim, Moh Aqbil Fadhlih An-Nafi, Rizky Afriza, Qolbi Atsir Athaullah, Bunga Adelia Putri Dhevia, Jamilah Nur Sakhi, Juanda Caesar Putra</p>
+            <p><strong>Asal:</strong> Kelas 11-3, 11-2, 11-3, 11-2, 11-1, 10-1, 11-3, 10-3, 10-3</p>
+            <ul>
+                <li>Mempersiapkan lokasi expo sebelum acara</li>
+                <li>Menyiapkan dan mengatur fasilitas lapangan</li>
+                <li>Menjaga keamanan dan ketertiban lokasi</li>
+                <li>Memandu peserta dan pengunjung</li>
+                <li>Menangani keadaan darurat</li>
+                <li>Melakukan cleanup area setelah acara</li>
+                <li>Menjaga protokol kesehatan dan keselamatan</li>
+            </ul>
+
+        </div>
+
+        <div class="job-item">
+            <h3>🎯 KETUA PELAKSANA 1 - Koordinasi Internal &amp; Eksternal</h3>
+            <p><strong>Nama:</strong> Bey Arifin Zakaria — <strong>Asal:</strong> PPNS - Angkatan 2024</p>
+            <p><strong>Fokus:</strong> Mengurusi segala aspek internal-eksternal, terutama koordinator dari mahasiswa dan OSIS</p>
+            <ul>
+                <li>Memimpin seluruh panitia Campus Expo 2026</li>
+                <li>Mengkoordinasikan semua divisi (Acara, Humas, Korlap, PDD, Konsumsi)</li>
+                <li>Menjalin hubungan dengan universitas mitra expo</li>
+                <li>Berkoordinasi dengan koordinator eksternal (mahasiswa)</li>
+                <li>Mengelola hubungan dengan sponsor dan media</li>
+                <li>Mengurus perizinan dan izin resmi</li>
+                <li>Membuat keputusan strategis untuk acara</li>
+                <li>Melaporkan perkembangan kepada pembina</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🎯 KETUA PELAKSANA 2 - Internal OSIS &amp; Keluarga Panitia</h3>
+            <p><strong>Nama:</strong> Mohammad Hafid Ilmi — <strong>Asal:</strong> Kelas 11-3 (Ketua OSIS)</p>
+            <p><strong>Fokus:</strong> Fokus ke internal anggota OSIS dan membangun hubungan keluarga panitia yang solid</p>
+            <ul>
+                <li>Membangun kohesi dan kekeluargaan dalam tim panitia</li>
+                <li>Menjaga hubungan baik antar anggota OSIS</li>
+                <li>Menyelesaikan konflik internal dengan pendekatan personal</li>
+                <li>Memberikan motivasi kepada semua anggota</li>
+                <li>Mengelola komunikasi internal panitia</li>
+                <li>Mengawasi semua divisi OSIS</li>
+                <li>Mengatur rapat koordinasi rutin</li>
+                <li>Menggantikan Ketua Pelaksana 1 jika diperlukan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>🎯 KETUA PELAKSANA 3 - Eksternal OSIS &amp; Hubungan Alumni</h3>
+            <p><strong>Nama:</strong> Shofi Rizqi Inayah — <strong>Asal:</strong> Kelas 11-1</p>
+            <p><strong>Fokus:</strong> Fokus ke eksternal anggota OSIS dengan para alumni (mahasiswa)</p>
+            <ul>
+                <li>Menjalin komunikasi dengan mahasiswa alumni OSIS</li>
+                <li>Membangun partnership dengan mahasiswa sebagai pembicara/narasumber</li>
+                <li>Menjaga hubungan dengan alumni OSIS yang berkontribusi</li>
+                <li>Mengundang alumni untuk berbagi pengalaman</li>
+                <li>Menciptakan networking opportunities</li>
+                <li>Menjadi jembatan antara OSIS dan mahasiswa alumni</li>
+                <li>Memastikan integrasi harmonis antara OSIS dan alumni</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>👥 WAKIL KETUA PELAKSANA</h3>
+            <p><strong>Nama:</strong> Nasik — <strong>Asal:</strong> UINSA - Angkatan 2024 (Koordinator Eksternal)</p>
+            <ul>
+                <li>Membantu seluruh ketiga Ketua Pelaksana</li>
+                <li>Menggantikan salah satu Ketua Pelaksana jika diperlukan</li>
+                <li>Mengawasi kinerja semua divisi</li>
+                <li>Menangani masalah dan hambatan yang muncul</li>
+                <li>Menjadi mediator dalam penyelesaian konflik</li>
+                <li>Memantau budget dan penggunaan dana</li>
+                <li>Siap melaksanakan tugas khusus apapun</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📝 SEKRETARIS UMUM 1 (EKSTERNAL)</h3>
+            <p><strong>Nama:</strong> Ita — <strong>Asal:</strong> UNESA - Angkatan 2024</p>
+            <ul>
+                <li>Mengelola surat-menyurat dan dokumen resmi panitia</li>
+                <li>Membuat catatan dan dokumentasi rapat</li>
+                <li>Mengatur jadwal rapat dan pertemuan</li>
+                <li>Mengelola database peserta dan booth expo</li>
+                <li>Mengurus perizinan dan surat-surat administrasi</li>
+                <li>Mengarsipkan dokumen penting</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📝 SEKRETARIS UMUM 2 (OSIS)</h3>
+            <p><strong>Nama:</strong> Naurah Salsabila — <strong>Asal:</strong> Kelas 11-1</p>
+            <ul>
+                <li>Membantu Sekretaris Umum 1 dalam administrasi</li>
+                <li>Menyiapkan dokumen dan proposal kegiatan</li>
+                <li>Mengatur sistem filing dan dokumentasi</li>
+                <li>Mencatat kehadiran peserta dan panitia</li>
+                <li>Menyusun laporan perkembangan kegiatan</li>
+                <li>Mengelola komunikasi antar divisi OSIS</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>📝 SEKRETARIS UMUM 3 (OSIS)</h3>
+            <p><strong>Nama:</strong> Mas Ayu Syarifah Fathimah — <strong>Asal:</strong> Kelas 10-1</p>
+            <ul>
+                <li>Membantu administrasi divisi operasional</li>
+                <li>Mencatat kebutuhan dari setiap divisi</li>
+                <li>Mengarsipkan dokumen divisi dengan rapi</li>
+                <li>Menyiapkan template dan format dokumen standar</li>
+                <li>Mendukung komunikasi antar divisi OSIS</li>
+                <li>Membantu penyusunan laporan akhir kegiatan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>💰 BENDAHARA UMUM 1 (EKSTERNAL)</h3>
+            <p><strong>Nama:</strong> Sevieka — <strong>Asal:</strong> UNESA - Angkatan 2024</p>
+            <ul>
+                <li>Mengelola keuangan panitia Campus Expo secara keseluruhan</li>
+                <li>Menerima dan mencatat semua pemasukan dana</li>
+                <li>Menyetujui dan mencatat semua pengeluaran</li>
+                <li>Membuat laporan keuangan berkala</li>
+                <li>Mengontrol penggunaan budget sesuai rencana</li>
+                <li>Bertanggung jawab atas pertanggungjawaban keuangan</li>
+                <li>Koordinasi dengan bendahara divisi</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>💰 BENDAHARA UMUM 2 (OSIS)</h3>
+            <p><strong>Nama:</strong> Arina Sa'adini Ahmadah — <strong>Asal:</strong> Kelas 10-2</p>
+            <ul>
+                <li>Membantu pengelolaan keuangan panitia</li>
+                <li>Membuat laporan kas harian dan mingguan</li>
+                <li>Menginventaris bukti pengeluaran dan bukti terima</li>
+                <li>Membantu rekonsiliasi keuangan bulanan</li>
+                <li>Menyiapkan rekapitulasi pengeluaran per divisi</li>
+                <li>Mendokumentasikan semua transaksi keuangan</li>
+            </ul>
+        </div>
+
+        <div class="job-item">
+            <h3>💰 BENDAHARA UMUM 3 (OSIS)</h3>
+            <p><strong>Nama:</strong> Novy Rizky Ardelia — <strong>Asal:</strong> Kelas 10-3</p>
+            <ul>
+                <li>Menangani kas harian dan transaksi kecil</li>
+                <li>Mencatat pengeluaran operasional rutin</li>
+                <li>Menyediakan laporan pengeluaran harian</li>
+                <li>Membantu audit internal keuangan</li>
+                <li>Mendokumentasikan bukti pengeluaran</li>
+                <li>Membantu perencanaan budget kegiatan</li>
+            </ul>
+        </div>
+    </div> <!-- end of #job-templates -->
+
+    <!-- modal untuk menampilkan job description -->
+    <style>
+    /* modal styles */
+    #job-modal {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.6); z-index: 9999; padding: 20px;
+    }
+    #job-modal .job-body {
+      background: #fff; color:#111; max-width:700px; width:100%; max-height:86vh; overflow:auto;
+      border-radius:10px; padding:20px; box-shadow:0 20px 60px rgba(0,0,0,0.4);
+      font-size: 14px;            /* lebih kecil */
+      text-align: center;         /* pusatkan teks paragraf/heading */
+      line-height: 1.45;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+    #job-modal .job-body h3 { margin-top:0; font-size:1.15em; text-align:center; }
+    #job-modal .job-body .job-content p { text-align:center; margin:8px 0; }
+    #job-modal .job-body .job-content ul {
+      text-align: left;           /* isi list tetap rata kiri untuk keterbacaan */
+      display: inline-block;      /* letakkan daftar sebagai blok yang terpusat */
+      margin: 12px auto;
+      padding-left: 20px;
+    }
+    #job-modal .job-body .job-content ul li {
+      font-size: 13.5px;
+      margin-bottom: 6px;
+    }
+    #job-modal .close-modal { float:right; cursor:pointer; font-weight:700; padding:4px 8px; border-radius:6px; background:#eee; }
+    </style>
+
+    <div id="job-modal" aria-hidden="true">
+      <div class="job-body" role="dialog" aria-modal="true">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong>Deskripsi Tugas</strong>
+          <span class="close-modal" title="Tutup">✕</span>
+        </div>
+        <div class="job-content" style="margin-top:12px;"></div>
+      </div>
+    </div>
+
+    <script>
+    // klik nama -> cari template yang mengandung nama dan tampilkan
+    document.addEventListener('click', function(e){
+      var t = e.target;
+      if (t.classList && (t.classList.contains('person-name') || t.classList.contains('anggota-name'))) {
+        var name = t.textContent.trim();
+        var templates = Array.from(document.querySelectorAll('#job-templates .job-item'));
+        var found = templates.find(function(item){
+          return item.innerText.toLowerCase().includes(name.toLowerCase());
+        });
+        var modal = document.getElementById('job-modal');
+        var content = modal.querySelector('.job-content');
+        if (found) {
+          content.innerHTML = found.innerHTML;
+        } else {
+          content.innerHTML = '<h3>Deskripsi tugas belum tersedia</h3><p>Tidak ditemukan template untuk: <strong>' + name + '</strong></p>';
+        }
+        modal.style.display = 'flex';
+        modal.setAttribute('aria-hidden','false');
+      }
+
+      // tutup modal
+      if (t.id === 'job-modal' || t.classList.contains('close-modal')) {
+        var modal = document.getElementById('job-modal');
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden','true');
+      }
+    });
+
+    // ESC untuk tutup
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape') {
+        var modal = document.getElementById('job-modal');
+        if (modal) { modal.style.display = 'none'; modal.setAttribute('aria-hidden','true'); }
+      }
+    });
+    </script>
+
 </body>
 </html>
